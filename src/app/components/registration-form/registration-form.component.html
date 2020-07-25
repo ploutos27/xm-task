@@ -1,0 +1,18 @@
+<form>
+  <ng-container *ngFor="let item of fields">
+    <div class="form-group row">
+      <div class="col-12">
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">{{item.label}}</div>
+          </div>
+          <input [type]="item.type" class="form-control">
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <div class="col">
+    <button type="submit" class="btn btn-primary mb-2">Submit</button>
+  </div>
+</form>
