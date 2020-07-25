@@ -1,12 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { registrationFormFieldsResponseExample } from '../../models/doc.models';
-import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl, ValidatorFn } from '@angular/forms';
+
+function returnLabelNameForInput(label: string): ValidatorFn {
+  return (control: AbstractControl): {[key: string]: any} | null => {
+    const isValid = control.value;
+    return  !isValid ? {'label': { value: label + ' is required'}} : null;
+  };
+}
 
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',
   styleUrls: ['./registration-form.component.scss']
 })
+
 
 export class RegistrationFormComponent implements OnInit {
   fields = registrationFormFieldsResponseExample;
@@ -34,15 +42,6 @@ export class RegistrationFormComponent implements OnInit {
     return group;
   }
 
-  // bind messages on validators
-  bindMessagesOnValidators() {
-    return {
-      errorField: {
-        label: 'control',
-      }
-    }
-  }
-
   // bind validations 
   bindValidations(isRequired: boolean, validations: any, label: string) {
     if (isRequired && validations.length > 0) {
@@ -53,6 +52,7 @@ export class RegistrationFormComponent implements OnInit {
             Boolean(valid.name === 'regex') ? Validators.pattern(valid.value) : null,
             Boolean(valid.name === 'maxlength') ? Validators.maxLength(valid.value) : null,
             Boolean(valid.name === 'minlength') ? Validators.minLength(valid.value) : null,
+            returnLabelNameForInput(label)
           ]));
         });
       return validList;

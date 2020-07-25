@@ -10,7 +10,6 @@ export class RegistrationErrorsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    //console.log(this.hasError)
   }
 
 }

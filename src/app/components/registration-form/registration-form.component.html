@@ -7,7 +7,7 @@
             <div class="input-group-text" [ngClass]="{required: item.required}">{{item.label}}</div>
           </div>
           <input [type]="item.type" class="form-control" formControlName="{{item.name}}"
-              [ngClass]="{'is-invalid': item.required && (f[item.name].invalid && ( f[item.name].dirty || f[item.name].touched)) }">
+              [ngClass]="{'is-invalid': (f[item.name].errors && ( f[item.name].dirty || f[item.name].touched)) }">
                 <div *ngIf="item.required && f[item.name].errors" class="invalid-feedback">
                   <app-registration-errors [hasError]="f[item.name]"></app-registration-errors>
                 </div>

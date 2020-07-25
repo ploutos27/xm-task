@@ -1,15 +1,31 @@
 <ng-container *ngIf="hasError.errors.required"> 
-   is Required
+    <div *ngIf="hasError.errors.label.value">
+        {{hasError.errors.label.value}}
+    </div>
 </ng-container>
 
 <ng-container *ngIf="hasError.errors.pattern"> 
-    pattern
+    <div *ngIf="hasError.errors.pattern.requiredPattern === '^[a-zA-Z0-9]*$'">
+        Only English characters are allowed.
+    </div>
+    <div *ngIf="hasError.errors.pattern.requiredPattern === '^[0-9]+$'">
+        Only numbers are allowed
+    </div>
+    <div *ngIf="hasError.errors.pattern.requiredPattern === '^.*[0-9].*$'">
+        1 or more numbers.
+    </div>
+    <div *ngIf="hasError.errors.pattern.requiredPattern === '^.*[a-z].*$'">
+        1 or more lower case letters.
+    </div>
+    <div *ngIf="hasError.errors.pattern.requiredPattern === '.*[A-Z].*$'">
+        1 or more upper case letters.
+    </div>
 </ng-container>
 
 <ng-container *ngIf="hasError.errors.maxlength"> 
-    maxlength
+    Must be less than {{hasError.errors.maxlength.requiredLength}} characters.
 </ng-container>
 
 <ng-container *ngIf="hasError.errors.minlength"> 
-    minlength
+    Must not be less than {{hasError.errors.minlength.requiredLength}} characters.
 </ng-container>
