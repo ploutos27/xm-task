@@ -6,10 +6,9 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 //Components
 import { AppComponent } from './app.component';
 import { DashboardComponent, RegistrationComponent, WelcomeComponent } from './routes';
+import { RegistrationButtonComponent, BreadcrumbsComponent, RegistrationFormComponent} from './components/index';
+import { RegistrationErrorsComponent } from './components/registration-errors/registration-errors.component';
 
-import { RegistrationButtonComponent } from './components/registration-button/registration-button.component';
-import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
-import { RegistrationFormComponent } from './components/registration-form/registration-form.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +18,8 @@ import { RegistrationFormComponent } from './components/registration-form/regist
     DashboardComponent,
     RegistrationButtonComponent,
     BreadcrumbsComponent,
-    RegistrationFormComponent
+    RegistrationFormComponent,
+    RegistrationErrorsComponent
   ],
   imports: [
     BrowserModule,

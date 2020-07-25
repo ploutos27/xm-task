@@ -1,0 +1,10 @@
+.input-group-text.required {
+    &:after {
+        display: inline-block;
+        content: '*';
+        color: #c0392b;
+        width: 10px;
+        height: 24px;
+        vertical-align: middle;
+    }
+}

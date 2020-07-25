@@ -21,6 +21,8 @@ interface BreadcrumbsFields {
     name: string;
 }
 
+export const errorMessages: [] = [];
+
 export const breadCrumbs: BreadcrumbsFields[] = [
     { route: '/', name: 'Dashboard' }, 
     { route: '/registration', name: 'Registration'},

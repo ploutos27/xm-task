@@ -5,7 +5,7 @@ import { breadCrumbs } from './models/doc.models';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styles: []
 })
 
 export class AppComponent implements OnInit  {
