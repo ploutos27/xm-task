@@ -9,7 +9,7 @@ export class RegistrationErrorsComponent implements OnInit {
   @Input() hasError: any;
   constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
+
 
 }

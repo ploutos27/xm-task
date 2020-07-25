@@ -2,13 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 //Components
 import { AppComponent } from './app.component';
+
+
 import { DashboardComponent, RegistrationComponent, WelcomeComponent } from './routes';
 import { RegistrationButtonComponent, BreadcrumbsComponent, RegistrationFormComponent, RegistrationErrorsComponent} from './components/index';
-
 
 
 @NgModule({

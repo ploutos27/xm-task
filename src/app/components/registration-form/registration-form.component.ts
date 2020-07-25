@@ -1,11 +1,41 @@
 import { Component, OnInit } from '@angular/core';
 import { registrationFormFieldsResponseExample } from '../../models/doc.models';
 import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl, ValidatorFn } from '@angular/forms';
+import { HttpService } from '../../services/http.service';
+import { first } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
-function returnLabelNameForInput(label: string): ValidatorFn {
+function dynamicMessages(label: string, data: any): ValidatorFn {
   return (control: AbstractControl): {[key: string]: any} | null => {
     const isValid = control.value;
-    return  !isValid ? {'label': { value: label + ' is required'}} : null;
+      if (!isValid) {
+        return {
+          'label': { value: label + ' is required' },
+        } 
+      } else {
+        if (data.name === 'regex') {
+          let regex =  new RegExp(data.value);
+            if (!regex.test(isValid)) {  
+              return {
+                'regex': { value: data },
+              } 
+            }
+        }
+        if (data.name === 'maxlength') {
+          if (isValid.length > data.value) {
+            return {
+              'max': { value: data },
+            } 
+          }
+        }
+        if (data.name === 'minlength') {
+          if (isValid.length < data.value) {
+            return {
+              'min': { value: data },
+            } 
+          }
+        }
+      }
   };
 }
 
@@ -23,13 +53,11 @@ export class RegistrationFormComponent implements OnInit {
   loading: boolean = false;
   fieldTextType: boolean = true;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, 
+    private httpServices: HttpService, private router: Router) { }
 
   ngOnInit(): void {
     this.group = this.createControl();
-    console.log(this.group)
-    console.log(this.fields)
-    console.log(this.f)
   }
 
   // Returning controls helper
@@ -41,7 +69,8 @@ export class RegistrationFormComponent implements OnInit {
     }
     this.loading = true;
 
-  
+    this.httpServices.login(this.group.value)
+    this.router.navigate(['/welcome']);
   }
 
   toggleFieldTextType(input: any) {
@@ -53,7 +82,10 @@ export class RegistrationFormComponent implements OnInit {
   createControl() {
     const group = this.fb.group({});
       this.fields.forEach(field => {
-        const control = this.fb.control('', this.bindValidations(field.required, field.validations, field.label));
+        const control = this.fb.control(
+          '', 
+          this.bindValidations(field.required, field.validations, field.label)
+        );
         group.addControl(field.name, control);
       });
     return group;
@@ -69,7 +101,7 @@ export class RegistrationFormComponent implements OnInit {
             Boolean(valid.name === 'regex') ? Validators.pattern(valid.value) : null,
             Boolean(valid.name === 'maxlength') ? Validators.maxLength(valid.value) : null,
             Boolean(valid.name === 'minlength') ? Validators.minLength(valid.value) : null,
-            returnLabelNameForInput(label)
+            dynamicMessages(label, valid)
           ]));
         });
       return validList;

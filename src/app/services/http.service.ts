@@ -9,11 +9,27 @@ import { environment } from '../../environments/environment';
   providedIn: 'root'
 })
 export class HttpService {
+  private userSubject: BehaviorSubject<User>;
+  public user: Observable<User>;
 
-  constructor(private router: Router,
-    private http: HttpClient) { }
+  constructor(private router: Router, private http: HttpClient) {
+    this.userSubject = new BehaviorSubject<User>(Object.assign({}));
+    this.user = this.userSubject.asObservable();
+   }
     
+
+
+    public get userValue(): User {
+      return this.userSubject.value;
+    }
+
+    login(user: User) {
+      this.userSubject.next(user);
+    }
+
     register(user: User) {
       return this.http.post(`${environment.serverEndPoint}/v1/users/register`, user);
     }
+
+
 }

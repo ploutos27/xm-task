@@ -36,7 +36,7 @@ export const errorMessages: [] = [];
 export const breadCrumbs: BreadcrumbsFields[] = [
     { route: '/', name: 'Dashboard' }, 
     { route: '/registration', name: 'Registration'},
-    { route: '/welecome', name: 'Welcome'}
+    { route: '/welcome', name: 'Welcome'}
 ];
 
 export const registrationFormFieldsResponseExample: RegistrationField[] = [
@@ -102,7 +102,7 @@ export const registrationFormFieldsResponseExample: RegistrationField[] = [
         validations: [
             {
                 name: 'regex',
-                message: 'Only English characters are allowed.',
+                message: 'Only emails are allowed.',
                 value: '^[a-z0-9]+@[a-z0-9]+\\.[a-z]{2,}$',
             },
             {
