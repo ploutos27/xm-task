@@ -21,6 +21,16 @@ interface BreadcrumbsFields {
     name: string;
 }
 
+export class User {
+    id: string;
+    first_name: string;
+    middle_name: string;
+    last_name: string;
+    email: string;
+    phone_number: number;
+    password: string;
+    token: string;
+}
 export const errorMessages: [] = [];
 
 export const breadCrumbs: BreadcrumbsFields[] = [

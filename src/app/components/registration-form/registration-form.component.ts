@@ -20,17 +20,34 @@ export class RegistrationFormComponent implements OnInit {
   fields = registrationFormFieldsResponseExample;
   group: FormGroup;
   btn: string = 'Register';
+  loading: boolean = false;
+  fieldTextType: boolean = true;
 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.group = this.createControl();
-    console.log(this.group);
+    console.log(this.group)
     console.log(this.fields)
+    console.log(this.f)
   }
 
   // Returning controls helper
   get f() { return this.group.controls; }
+
+  onSubmit() {
+    if (this.group.invalid) {
+      return;
+    }
+    this.loading = true;
+
+  
+  }
+
+  toggleFieldTextType(input: any) {
+    input.type = input.type === 'password' ? 'text' : 'password';
+    this.fieldTextType = !this.fieldTextType;
+  }
 
   // Create Controls
   createControl() {

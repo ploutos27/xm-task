@@ -2,12 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 //Components
 import { AppComponent } from './app.component';
 import { DashboardComponent, RegistrationComponent, WelcomeComponent } from './routes';
-import { RegistrationButtonComponent, BreadcrumbsComponent, RegistrationFormComponent} from './components/index';
-import { RegistrationErrorsComponent } from './components/registration-errors/registration-errors.component';
+import { RegistrationButtonComponent, BreadcrumbsComponent, RegistrationFormComponent, RegistrationErrorsComponent} from './components/index';
+
 
 
 @NgModule({
@@ -25,9 +26,11 @@ import { RegistrationErrorsComponent } from './components/registration-errors/re
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

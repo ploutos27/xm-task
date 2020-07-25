@@ -17,7 +17,7 @@
     <div *ngIf="hasError.errors.pattern.requiredPattern === '^.*[a-z].*$'">
         1 or more lower case letters.
     </div>
-    <div *ngIf="hasError.errors.pattern.requiredPattern === '.*[A-Z].*$'">
+    <div *ngIf="hasError.errors.pattern.requiredPattern === '^.*[A-Z].*$'">
         1 or more upper case letters.
     </div>
 </ng-container>
