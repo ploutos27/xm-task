@@ -1,0 +1,22 @@
+<form [formGroup]="login" (ngSubmit)="onSubmit()">
+  <div class="form-group row">
+    <div class="col-12">
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text required">Email</div>
+        </div>
+        <input type="text" class="form-control" formControlName="email"
+          [ngClass]="{'is-invalid': (f.email.errors && (f.email.dirty || f.email.touched)) }">
+      </div>
+    </div>
+    <div class="col-12">
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text required">Password</div>
+          </div>
+          <input type="password" class="form-control" formControlName="password"
+            [ngClass]="{'is-invalid': (f.password.errors && (f.password.dirty || f.password.touched)) }">
+        </div>
+      </div>
+  </div>
+</form>

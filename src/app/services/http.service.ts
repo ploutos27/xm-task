@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../models/doc.models';
 import { environment } from '../../environments/environment';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -13,22 +14,40 @@ export class HttpService {
   public user: Observable<User>;
 
   constructor(private router: Router, private http: HttpClient) {
-    this.userSubject = new BehaviorSubject<User>(Object.assign({}));
+    this.userSubject = new BehaviorSubject<User>(null);
     this.user = this.userSubject.asObservable();
    }
     
-
-
     public get userValue(): User {
       return this.userSubject.value;
     }
 
-    login(user: User) {
-      this.userSubject.next(user);
+    login(email, password) {
+      return this.http.post<User>(`${environment.apiUrl}/users/authenticate`, { email, password })
+          .pipe(map(user => {
+              // store user details and jwt token in local storage to keep user logged in between page refreshes
+              localStorage.setItem('user', JSON.stringify(user));
+              this.userSubject.next(user);
+              return user;
+          }));
+    }
+
+    logout() {
+      localStorage.removeItem('user');
+      this.userSubject.next(null);
+      this.router.navigate(['/']);
+    }
+
+    getAll() {
+      return this.http.get<User[]>(`${environment.apiUrl}/users`);
+    }
+
+    getById(id: string) {
+      return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
     }
 
     register(user: User) {
-      return this.http.post(`${environment.serverEndPoint}/v1/users/register`, user);
+        return this.http.post(`${environment.apiUrl}/users/register`, user);
     }
 
 

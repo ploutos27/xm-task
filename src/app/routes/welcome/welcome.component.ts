@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../services/http.service';
-import { Router } from '@angular/router';
 import { User } from '../../models/doc.models';
 
 @Component({
@@ -11,14 +10,9 @@ import { User } from '../../models/doc.models';
 
 export class WelcomeComponent implements OnInit {
   registerUser: User;
-  constructor(private httpServices: HttpService, private router: Router) { }
+  constructor(private httpServices: HttpService) { }
 
   ngOnInit(): void {
-    if (Object.keys(this.httpServices.userValue).length === 0 && 
-            this.httpServices.userValue.constructor === Object) {
-              this.router.navigate(['/registration']);
-
-    }
     this.registerUser = this.httpServices.userValue;
   }
 

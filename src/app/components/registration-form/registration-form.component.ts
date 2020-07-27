@@ -63,14 +63,23 @@ export class RegistrationFormComponent implements OnInit {
   // Returning controls helper
   get f() { return this.group.controls; }
 
+
   onSubmit() {
     if (this.group.invalid) {
       return;
     }
     this.loading = true;
 
-    this.httpServices.login(this.group.value)
-    this.router.navigate(['/welcome']);
+    this.httpServices.register(this.group.value)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.router.navigate(['/']);
+        },
+        error => {
+          console.log(error)
+          this.loading = false;
+        });
   }
 
   toggleFieldTextType(input: any) {

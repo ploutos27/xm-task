@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd} from '@angular/router';
-import { breadCrumbs } from './models/doc.models';
+import { breadCrumbs, User } from './models/doc.models';
+import { HttpService } from './services/http.service';
 
 @Component({
   selector: 'app-root',
@@ -10,16 +11,15 @@ import { breadCrumbs } from './models/doc.models';
 
 export class AppComponent implements OnInit  {
   name: string;
-  constructor(router: Router) {
+  user: User;
+  
+  constructor(router: Router, private httpServices: HttpService) {
     router.events.forEach((event) => {
       if(event instanceof NavigationEnd) {
-        breadCrumbs.forEach(el => {
-          if (el.route === event.url) {
-            this.name = el.name
-          }
-        });
-      }
-    });
+         let r = breadCrumbs.findIndex(x => x.route === event.url);
+          r === -1 ? this.name = 'Not Found' :  this.name = breadCrumbs[r].name;
+        }
+      });
   }
 
   ngOnInit(): void {
