@@ -4,6 +4,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
+// Fake back-end
+import { fakeBackendProvider } from './helpers';
+
 //Components
 import { AppComponent } from './app.component';
 import { DashboardComponent, RegistrationComponent, WelcomeComponent } from './routes';
@@ -12,7 +15,7 @@ import { RegistrationButtonComponent, BreadcrumbsComponent,
   LoginButtonComponent, RegistrationLoginComponent } from './components/index';
 
 // Helpers
-import { fakeBackendProvider, JwtInterceptor, ErrorInterceptor } from './helpers';
+import { JwtInterceptor, ErrorInterceptor } from './helpers';
 import { NotFoundComponent } from './routes/not-found/not-found.component';
 
 @NgModule({

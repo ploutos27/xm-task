@@ -1,5 +1,6 @@
 <nav aria-label="breadcrumb">
-    <ol class="breadcrumb mb-0">
+    <ol class="breadcrumb mb-0 justify-content-between">
       <li class="breadcrumb-item active" aria-current="page">{{breadCrumbName}}</li>
+      <li *ngIf="user" class="breadcrum-item"><i class="fa fa-sign-out" (click)="logout()"></i></li>
     </ol>
   </nav>

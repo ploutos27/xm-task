@@ -28,7 +28,8 @@ html, body {
     padding-left: 13px;
 }
 
-input[type="password"] {
+input[type="password"],
+.cm input[type=text] {
     border-top-right-radius: 0 !important;
     border-bottom-right-radius: 0 !important;
 }

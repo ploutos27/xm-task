@@ -12,6 +12,9 @@ export class RegistrationComponent implements OnInit {
 
   constructor( private router: Router,
     private httpServices: HttpService) { 
+      if (this.httpServices.userValue) {
+        this.router.navigate(['/welcome']);
+      }
   }
 
   ngOnInit(): void {
