@@ -19,8 +19,8 @@ export class RegistrationLoginComponent implements OnInit {
   emailText: string = 'Email';
   passwordText: string = 'Password';
   loading: boolean = false;
+  submitted: boolean = false;
 
-  
   constructor(private formBuilder: FormBuilder,
     private sharedService: SharedService,
     private router: Router,
@@ -32,6 +32,10 @@ export class RegistrationLoginComponent implements OnInit {
     this.login = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
+    });
+
+    this.login.statusChanges.subscribe(res=> {
+      this.sharedService.sendClickEventChangeLoginFormStatus(res);
     });
   }
 
